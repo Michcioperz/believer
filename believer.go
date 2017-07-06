@@ -1,12 +1,12 @@
 package main
 
 import (
-				"os"
-				"os/exec"
-				"log"
-				"strings"
-				"time"
-			 )
+	"log"
+	"os"
+	"os/exec"
+	"strings"
+	"time"
+)
 
 type StringArray []string
 type ResolutionData map[string]StringArray
@@ -27,7 +27,7 @@ func XrandrRead() (ResolutionData, error) {
 			values[lastName] = []string{}
 		} else if line[:3] == "   " {
 			endOfNewRes := strings.Index(line[3:], " ")
-			newRes := line[3:3+endOfNewRes]
+			newRes := line[3 : 3+endOfNewRes]
 			values[lastName] = append(values[lastName], newRes)
 		}
 	}
@@ -110,7 +110,7 @@ func main() {
 	}
 	log.Println(setCmd)
 	log.Println("applying in 3 seconds if not opposed")
-	time.Sleep(3*time.Second)
+	time.Sleep(3 * time.Second)
 	err = exec.Command("xrandr", setCmd[1:]...).Run()
 	if err != nil {
 		log.Fatal(err)
